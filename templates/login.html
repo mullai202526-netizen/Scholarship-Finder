@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Student Sign In{% endblock %}
+{% block content %}
+<section class="form-shell">
+  <div class="form-card">
+    <span class="form-icon">🔐</span>
+    <h1>Welcome back</h1><p class="muted">Sign in to your student account.</p>
+    <form method="post">
+      <label>Email address</label>
+      <input type="email" name="email" placeholder="you@example.com" required autocomplete="email">
+      <label>Password</label>
+      <input type="password" name="password" placeholder="Enter password" required autocomplete="current-password">
+      <button class="btn full" type="submit">Sign in</button>
+    </form>
+    <div class="divider"><span>OR</span></div>
+    <button class="google-placeholder" type="button" disabled>🌐 Sign in with Google — setup required</button>
+    <p class="small muted">Google sign-in is a visual placeholder until OAuth credentials are configured.</p>
+    <p class="form-bottom">New student? <a href="{{ url_for('register') }}">Create an account</a></p>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Student Dashboard{% endblock %}
+{% block content %}
+<section class="dashboard-head">
+  <div>
+    <span class="eyebrow">Student dashboard</span>
+    <h1>Vanakkam, {{ student.name }}! 👋</h1>
+    <p class="muted">Here are scholarship information starting points for your student group.</p>
+  </div>
+  <a class="btn btn-outline" href="{{ url_for('profile') }}">Edit profile</a>
+</section>
+<div class="profile-summary">
+  {% if student.photo %}
+    <img class="avatar" src="{{ url_for('static', filename='uploads/' + student.photo) }}" alt="Profile photo">
+  {% else %}
+    <div class="avatar avatar-placeholder">👤</div>
+  {% endif %}
+  <div><b>{{ student.student_type|title }} student</b><p>{{ student.course }}{% if student.marks is not none %} · {{ student.marks }}%{% endif %}{% if student.district %} · {{ student.district }}{% endif %}</p></div>
+</div>
+<section class="section">
+  <div class="section-heading"><div><span class="eyebrow">Explore</span><h2>Scholarship suggestions</h2></div></div>
+  <div class="cards">
+    {% for item in scholarships %}
+    <article class="card">
+      <span class="tag">{{ item.type }}</span>
+      <h3>{{ item.name }}</h3>
+      <p class="muted">{{ item.audience }}</p>
+      <p>{{ item.description }}</p>
+      <a class="text-link" href="{{ item.url }}" target="_blank" rel="noopener noreferrer">Check official details ↗</a>
+    </article>
+    {% else %}
+    <p>No suggestions are available yet. Check the official portals below.</p>
+    {% endfor %}
+  </div>
+  <div class="notice">These suggestions are based only on your student type. They do not confirm eligibility. Each scheme may have separate rules for income, category, course, marks, institution and application dates. Verify every condition on the official scheme page.</div>
+</section>
+{% endblock %}

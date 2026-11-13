@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Student Profile{% endblock %}
+{% block content %}
+<section class="form-shell">
+  <div class="form-card wide">
+    <span class="eyebrow">Step 2 of 2</span>
+    <h1>Complete your student profile</h1>
+    <p class="muted">We use these details to show relevant scholarship information.</p>
+    {% if student.photo %}
+      <img class="profile-photo" src="{{ url_for('static', filename='uploads/' + student.photo) }}" alt="Profile photo">
+    {% endif %}
+    <form method="post">
+      <label>Full name</label>
+      <input value="{{ student.name }}" disabled>
+      <label>Email address</label>
+      <input value="{{ student.email }}" disabled>
+      <label>Student type</label>
+      <select name="student_type" required>
+        <option value="">Select student type</option>
+        <option value="school" {% if student.student_type == 'school' %}selected{% endif %}>School student</option>
+        <option value="college" {% if student.student_type == 'college' %}selected{% endif %}>College student</option>
+      </select>
+      <label>Class / Course</label>
+      <input name="course" value="{{ student.course }}" placeholder="Example: 12th / B.E CSE" required>
+      <label>Academic marks (%) <span class="hint">(optional)</span></label>
+      <input type="number" name="marks" min="0" max="100" step="0.01" value="{{ student.marks if student.marks is not none else '' }}" placeholder="Example: 85">
+      <label>District <span class="hint">(optional)</span></label>
+      <input name="district" value="{{ student.district }}" placeholder="Example: Ariyalur">
+      <button class="btn full" type="submit">Save profile and continue</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

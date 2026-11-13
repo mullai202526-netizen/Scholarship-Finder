@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Scholarship Finder | Home{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy">
+    <span class="eyebrow">Tamil Nadu students · School & College</span>
+    <h1>Your future.<br><span>Your scholarship.</span></h1>
+    <p>Discover scholarship information and official application portals in one place.</p>
+    <div class="hero-actions">
+      {% if student %}
+        <a class="btn" href="{{ url_for('dashboard') }}">Go to dashboard</a>
+      {% else %}
+        <a class="btn" href="{{ url_for('register') }}">Create student account</a>
+        <a class="btn btn-outline" href="{{ url_for('login') }}">Student sign in</a>
+      {% endif %}
+    </div>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <div class="art-circle">🎓</div><div class="art-card">📚 Learn<br>✨ Grow</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-heading">
+    <div><span class="eyebrow">Explore</span><h2>Scholarship information</h2></div>
+    <p>Search by name, student group or category.</p>
+  </div>
+  <form class="search-form" method="get" action="{{ url_for('home') }}">
+    <input type="search" name="q" value="{{ query }}" placeholder="Search scholarships..." aria-label="Search scholarships">
+    <button class="btn" type="submit">Search</button>
+  </form>
+  <div class="cards">
+    {% for item in scholarships %}
+    <article class="card">
+      <span class="tag">{{ item.type }}</span>
+      <h3>{{ item.name }}</h3>
+      <p class="muted">{{ item.audience }}</p>
+      <p>{{ item.description }}</p>
+      <a class="text-link" href="{{ item.url }}" target="_blank" rel="noopener noreferrer">Visit official website ↗</a>
+    </article>
+    {% else %}
+    <p>No matching entries. Try another search term.</p>
+    {% endfor %}
+  </div>
+  <p class="notice">Note: These are starting points, not a complete or live-verified scholarship list. Always confirm current eligibility, benefits and deadlines on the official portal.</p>
+</section>
+
+<section class="how-section">
+  <h2>How it works</h2>
+  <div class="steps">
+    <div><b>01</b><h3>Create account</h3><p>Register with your email and mobile number.</p></div>
+    <div><b>02</b><h3>Complete profile</h3><p>Add your student type, class/course and marks.</p></div>
+    <div><b>03</b><h3>Explore matches</h3><p>See starting suggestions and visit official portals.</p></div>
+  </div>
+</section>
+{% endblock %}

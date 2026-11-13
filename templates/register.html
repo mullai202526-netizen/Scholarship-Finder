@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Create Student Account{% endblock %}
+{% block content %}
+<section class="form-shell">
+  <div class="form-card wide">
+    <span class="form-icon">🎓</span>
+    <h1>Create your account</h1><p class="muted">Start your Scholarship Finder profile.</p>
+    <form method="post" enctype="multipart/form-data">
+      <label>Full name</label>
+      <input type="text" name="name" placeholder="Your full name" required autocomplete="name">
+      <label>Email address</label>
+      <input type="email" name="email" placeholder="you@example.com" required autocomplete="email">
+      <label>Mobile number</label>
+      <input type="tel" name="mobile" placeholder="10-digit mobile number" pattern="[0-9]{10}" maxlength="10" required>
+      <label>Password <span class="hint">(minimum 8 characters)</span></label>
+      <input type="password" name="password" minlength="8" required autocomplete="new-password">
+      <label>Confirm password</label>
+      <input type="password" name="confirm_password" minlength="8" required autocomplete="new-password">
+      <label>Profile photo <span class="hint">(optional · JPG/PNG/WEBP · max 3 MB)</span></label>
+      <input class="file-input" type="file" name="photo" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
+      <button class="btn full" type="submit">Create account</button>
+    </form>
+    <p class="form-bottom">Already registered? <a href="{{ url_for('login') }}">Sign in</a></p>
+  </div>
+</section>
+{% endblock %}
